@@ -1,7 +1,8 @@
 const nodemailer = require("nodemailer");
-// require("dotenv").config();
 
-async function sendMail(senderName, email, subject, message) {
+async function sendMail(mailData) {
+  const { senderName, recevierEmail, subject, message } = mailData;
+
   try {
     let transporter = nodemailer.createTransport({
       service: "gmail",
@@ -13,15 +14,13 @@ async function sendMail(senderName, email, subject, message) {
 
     const mailOptions = {
       from: `${senderName} <jsnowin6@gmail.com>`,
-      to: `${email}`,
+      to: `${recevierEmail}`,
       subject: `${subject}`,
       html: `${message}`,
-      // html: `${html}`,
     };
 
     // send mail with defined transport object
     let result = await transporter.sendMail(mailOptions);
-
     return result;
   } catch (error) {
     return error;

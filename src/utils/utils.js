@@ -1,9 +1,7 @@
-const isVaildAPI = (userAPI, serverAPI) => {
-  if (userAPI === serverAPI) {
-    return true;
-  }
+function success(message) {
+  res.send(message);
+}
 
-  return false;
-};
-
-module.exports = isVaildAPI;
+function failure(message) {
+  res.send(message);
+}
