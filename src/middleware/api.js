@@ -6,8 +6,8 @@ const sendMail = require("../services/sendmail");
 const MAX_COUNT = process.env.API_MAX || 25;
 
 const createUser = async (data) => {
-  const API_KEY = uuid();
   const { name, email, password } = data;
+  const API_KEY = uuid();
 
   // Hash apikey and password
   const hashedApikey = await bcrypt.hash(API_KEY, 10);
@@ -49,9 +49,9 @@ const validatekey = async (req, res, next) => {
   if (account) {
     (await bcrypt.compare(apikey, account.apikey))
       ? next()
-      : res.status(403).send({ error: 403, message: "You are not allowed!." });
+      : res.status(405).send({ error: 405, message: "You are not allowed!." });
   } else {
-    res.status(403).send({ error: 404, message: "Account not found!" });
+    res.status(404).send({ error: 404, message: "Account not found!" });
   }
 };
 
